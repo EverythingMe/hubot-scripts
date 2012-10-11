@@ -30,7 +30,7 @@ module.exports = (robot) ->
   	channel = process.env.OS_PUBNUB_CHANNEL
   	key = process.env.OS_KEY
 
-  	msg.http('http://pubsub.pubnub.com/publish/#{publish_key}/#{subscribe_key}/#{secret_key}/#{channel}/0/{"cmd": "open", "key": "#{key}"}')
+  	msg.http('http://pubsub.pubnub.com/publish/' + publish_key + '/' + subscribe_key + '/' + secret_key + '/' + channel + '/0/{"cmd": "open", "key": "' + key + '"}')
     .get() (err, res, body) ->
       response = JSON.parse(body)
       if response

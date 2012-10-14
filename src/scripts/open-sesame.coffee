@@ -29,16 +29,14 @@ module.exports = (robot) ->
     secret_key = process.env.OS_PUBNUB_SECRET_KEY
     channel = process.env.OS_PUBNUB_CHANNEL
     key = process.env.OS_KEY
-
+    
     reqUrl = 'http://pubsub.pubnub.com/publish/' + publish_key + '/' + subscribe_key + '/' + secret_key + '/' + channel + '/0/{"cmd": "open", "key": "' + key + '"}'
-    console.log reqUrl
-
+    
     # issue http request
     msg.http(reqUrl)
     .get() (err, res, body) ->
       response = JSON.parse(body)
-      if response[0]=="1"
-        console.log response
+      if response[0] is 1 and response[1] is 'Sent'
         msg.send "The deed was done"
       else
         msg.send "something went wrong, lockdown protocol initiated?"
